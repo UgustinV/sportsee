@@ -1,5 +1,7 @@
 import type { Route } from "./+types/home";
+import { useOutletContext } from "react-router";
 import { Login } from "../login/login";
+import type { User } from "../types";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,5 +11,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Login />;
+  const { setUser } = useOutletContext<{ setUser: (u: User | null) => void }>();
+  return <Login setUser={setUser} />;
 }

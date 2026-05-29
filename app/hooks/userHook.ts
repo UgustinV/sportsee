@@ -4,7 +4,6 @@ import { mockUser, mockUserInfoResponse, normalizeUser } from "../data/mockData"
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 const BACKEND = import.meta.env.VITE_SERVER_URL;
-console.log("Using mock data:", USE_MOCK);
 
 export function useUserInfo(userId: string): { user: User | null; loading: boolean } {
   const [user, setUser] = useState<User | null>(null);

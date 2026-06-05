@@ -4,7 +4,7 @@ import type { Route } from "./+types/protected";
 export function clientLoader(_: Route.ClientLoaderArgs) {
     const token = localStorage.getItem("token");
     if (!token) {
-        throw redirect("/");
+        throw new Response("Unauthorized", { status: 401 });
     }
     return null;
 }

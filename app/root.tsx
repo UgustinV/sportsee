@@ -77,17 +77,14 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-    let message = "Oops!";
-    let details = "An unexpected error occurred.";
+    let message = "Oups!";
+    let details = "Une erreur inattendue est survenue.";
     let stack: string | undefined;
 
     if (isRouteErrorResponse(error)) {
-        message = error.status === 404 ? "404" : "Error";
-        details =
-        error.status === 404
-            ? "La page demandée est introuvable."
-            : error.statusText || details;
-    } else if (import.meta.env.DEV && error && error instanceof Error) {
+        message = error.status === 404 ? "404" : error.status === 401 ? "401" : "Erreur";
+        details = error.status === 404 ? "La page demandée est introuvable." : error.status === 401 ? "Non autorisé" : error.statusText || details;
+    } else if (error && error instanceof Error) {
         details = error.message;
         stack = error.stack;
     }
@@ -96,6 +93,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <main className="pt-16 p-4 container mx-auto">
         <h1>{message}</h1>
         <p>{details}</p>
+        <a href="/" className="text-blue-500 underline">Retour à l'accueil</a>.
         {stack && (
             <pre className="w-full p-4 overflow-x-auto">
             <code>{stack}</code>

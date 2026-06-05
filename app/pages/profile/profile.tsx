@@ -1,45 +1,41 @@
-import { useUserInfo } from "../../hooks/userHook";
-import { useActivity } from "../../hooks/activityHook";
+import { useActivity } from "~/hooks/activityHook";
+import { userContext } from "~/context";
+import { useContext } from "react";
+import ActivityChart from "~/components/chart";
 
 export function Profile() {
-  const { user, loading: userLoading } = useUserInfo("user456");
-  const { activity, loading: activityLoading } = useActivity(
-    "2025-05-18",
-    "2025-05-29"
-  );
+    const currentDate = new Date();
+    const pastWeek = new Date(currentDate.getTime() - 28 * 24 * 60 * 60 * 1000);
+    const { user } = useContext(userContext);
+    const { activity, loading: activityLoading } = useActivity(
+        pastWeek.toISOString().substring(0, 10),
+        currentDate.toISOString().substring(0, 10)
+    );
+    console.log(activity);
+    if (activityLoading) {
+        return <div>Chargement...</div>;
+    }
 
-  if (userLoading || activityLoading) {
-    return <div>Chargement...</div>;
-  }
+    if (!user) {
+        return <div>Utilisateur introuvable.</div>;
+    }
+    return (
+        <div>
+            <h1>Bonjour {user.firstName} {user.lastName}</h1>
 
-  if (!user) {
-    return <div>Utilisateur introuvable.</div>;
-  }
-
-  return (
-    <div>
-      <h1>Bonjour {user.firstName} {user.lastName}</h1>
-
-      <section>
-        <h2>Statistiques globales</h2>
-        <ul>
-          <li>Sessions : {user.totalSessions}</li>
-          <li>Distance totale : {user.totalDistance} km</li>
-          <li>Durée totale : {user.totalDuration} min</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Activité récente</h2>
-        <ul>
-          {activity.map((session) => (
-            <li key={session.date}>
-              {session.date} — {session.distance} km — {session.duration} min —{" "}
-              {session.caloriesBurned} kcal
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
+            <section>
+                <h2>Statistiques globales</h2>
+                <ul>
+                <li>Sessions : {user.totalSessions}</li>
+                <li>Distance totale : {user.totalDistance} km</li>
+                <li>Durée totale : {user.totalDuration} min</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Vos dernières performances</h2>
+                <ActivityChart activity={activity} chartType="distance" />
+                <ActivityChart activity={activity} chartType="bpm" />
+            </section>
+        </div>
+    );
 }

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { login, fetchUserInfo } from "../hooks/loginHook";
-import illustration from "../images/login_illustration.jpg";
-import type { User } from "../types";
+import { login, fetchUserInfo } from "../../hooks/loginHook";
+import illustration from "../../images/login_illustration.jpg";
+import type { User } from "../../types";
 
 interface LoginProps {
   setUser: (u: User | null) => void;

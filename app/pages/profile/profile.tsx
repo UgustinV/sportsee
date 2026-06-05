@@ -1,5 +1,5 @@
-import { useUserInfo } from "../hooks/userHook";
-import { useActivity } from "../hooks/activityHook";
+import { useUserInfo } from "../../hooks/userHook";
+import { useActivity } from "../../hooks/activityHook";
 
 export function Profile() {
   const { user, loading: userLoading } = useUserInfo("user456");

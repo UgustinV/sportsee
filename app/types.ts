@@ -14,6 +14,7 @@ export interface UserProfileApi {
   lastName: string;
   createdAt: string;
   age: number;
+  gender: string;
   weight: number;
   height: number;
   profilePicture: string;
@@ -41,9 +42,11 @@ export interface User {
   firstName: string;
   lastName: string;
   age: number;
+  gender: string;
   weight: number;
   height: number;
   profilePicture: string;
+  createdAt: string;
   totalDistance: number;
   totalSessions: number;
   totalDuration: number;

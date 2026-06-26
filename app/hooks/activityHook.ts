@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import type { ActivitySession } from "../types";
-import { mockActivity } from "../data/mockData";
+import type { ActivitySession } from "~/types";
+import { mockActivity } from "~/data/mockData";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 const BACKEND = import.meta.env.VITE_SERVER_URL;
@@ -12,6 +12,8 @@ export function useActivity(
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!startWeek) return;
+
     if (USE_MOCK) {
       setActivity(mockActivity);
       setLoading(false);

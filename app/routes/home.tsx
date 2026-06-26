@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { useOutletContext } from "react-router";
-import { Login } from "../pages/login/login";
-import type { User } from "../types";
+import { Login } from "~/pages/login/login";
+import type { User } from "~/types";
 
 export function meta({}: Route.MetaArgs) {
   return [

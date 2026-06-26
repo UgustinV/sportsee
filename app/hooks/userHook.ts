@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import type { User } from "../types";
-import { mockUser, mockUserInfoResponse, normalizeUser } from "../data/mockData";
+import type { User } from "~/types";
+import { mockUser, mockUserInfoResponse, normalizeUser } from "~/data/mockData";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 const BACKEND = import.meta.env.VITE_SERVER_URL;
@@ -24,9 +24,13 @@ export function useUserInfo(userId: string): { user: User | null; loading: boole
       .then((r) => r.json())
       .then((data) => {
         setUser(normalizeUser(userId, data));
+        console.log(user);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((error) => {
+        console.error("Error fetching user info:", error);
+        setLoading(false);
+      });
   }, [userId]);
 
   return { user, loading };

@@ -17,14 +17,12 @@ export function useUserInfo(userId: string): { user: User | null; loading: boole
     }
 
     const token = localStorage.getItem("token");
-    console.log("Fetching user info for userId:", userId, "with token:", token);
     fetch(`${BACKEND}/api/user-info`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
       .then((data) => {
         setUser(normalizeUser(userId, data));
-        console.log(user);
         setLoading(false);
       })
       .catch((error) => {

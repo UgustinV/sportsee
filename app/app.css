@@ -9,3 +9,11 @@ html,
 body {
   @apply bg-[#f2f3ff];
 }
+
+.recharts-line-curve {
+  transition: stroke 0.2s ease-in;
+}
+
+.recharts-bar-rectangle rect {
+  transition: fill 0.2s ease-in;
+}

@@ -123,7 +123,7 @@ export function Dashboard() {
                             <p className="text-3xl text-[#0B23F4]">x{activityCurrentWeek.length}</p>
                             <p className="text-[#B6BDFC] text-[16px]">sur objectif de {objectif}</p>
                         </div>
-                        <p className="text-[#707070] text-sm mb-10">Courses hebdomadaire réalisées</p>
+                        <p className="text-[#707070] text-sm">Courses hebdomadaire réalisées</p>
                         <CamembertChart activity={activityCurrentWeek} objectif={objectif} />
                     </div>
                     <div className="flex flex-col gap-8 w-3/5">
